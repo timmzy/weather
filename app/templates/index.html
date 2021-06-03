@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5 mx-auto">
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="form-group mb-2">
+                    <label for="id_latitude">Latitude</label>
+                    <input value="{{ lat }}" id="id_latitude" type="number" step=".01" class="form-control" name="lat">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="id_longitude">Longitude</label>
+                    <input value="{{ lon }}" id="id_longitude" type="number" step=".01" class="form-control" name="lon">
+                </div>
+                <button class="btn btn-success">Get data</button>
+            </form>
+        </div>
+    </div>
+    {% if weather_data %}
+        <div class="row mt-5">
+            <div class="col-sm-5 mx-auto">
+                <dl class="row">
+                    <dt class="col-sm-6">Time</dt>
+                    <dd class="col-sm-6">{{ weather_data.time }}</dd>
+                    <dt class="col-sm-6">air_pressure_at_sea_level</dt>
+                    <dd class="col-sm-6">{{ weather_data.air_pressure_at_sea_level }}</dd>
+                    <dt class="col-sm-6">air_temperature</dt>
+                    <dd class="col-sm-6">{{ weather_data.air_temperature }}</dd>
+                    <dt class="col-sm-6">cloud_area_fraction</dt>
+                    <dd class="col-sm-6">{{ weather_data.cloud_area_fraction }}</dd>
+                    <dt class="col-sm-6">relative_humidity</dt>
+                    <dd class="col-sm-6">{{ weather_data.relative_humidity }}</dd>
+                    <dt class="col-sm-6">wind_from_direction</dt>
+                    <dd class="col-sm-6">{{ weather_data.wind_from_direction }}</dd>
+                    <dt class="col-sm-6">wind_speed</dt>
+                    <dd class="col-sm-6">{{ weather_data.wind_speed }}</dd>
+                    <dt class="col-sm-6">next_1_hours_summary</dt>
+                    <dd class="col-sm-6">{{ weather_data.next_1_hours_summary }}</dd>
+                </dl>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
